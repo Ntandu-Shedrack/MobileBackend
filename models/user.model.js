@@ -22,6 +22,8 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 6, // Minimum length for password
   },
+  resetPasswordToken: { type: String },
+  resetPasswordExpiry: { type: Date },
 });
 
 // Hash the password before saving
