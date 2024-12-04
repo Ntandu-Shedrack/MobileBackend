@@ -107,7 +107,7 @@ const requestPasswordReset = async (req, res) => {
     });
 
     const mailOptions = {
-      from: "noreply@example.com",
+      from: "ntandushedrackjoseph@gmail.com",
       to: email,
       subject: "Password Reset Request",
       text: `You have requested to reset your password. Please use the following link within 10 minutes:\n\n${resetUrl}`,
