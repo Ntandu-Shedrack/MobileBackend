@@ -161,9 +161,41 @@ const resetPassword = async (req, res) => {
   }
 };
 
+
+const getUserProfile = async (req, res) => {
+  try {
+    // Get the token from the authorization header
+    const token = req.header("Authorization").replace("Bearer ", "");
+
+    if (!token) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    // Verify and decode the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+
+    // Fetch user profile data
+    const user = await User.findById(userId).select("-password"); // Exclude password from the response
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "User profile fetched successfully",
+      data: user,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
 module.exports = {
   userRegistration,
   userLogin,
   requestPasswordReset,
   resetPassword,
+  getUserProfile
 };
