@@ -13,7 +13,7 @@ app.use(cors());
 
 // Routes
 const authRoutes = require("./routes/auth.route");
-app.use("/api/auth", authRoutes); // This correctly sets the route prefix
+app.use("/api/auth", authRoutes);
 
 // Connect to MongoDB
 mongoose
